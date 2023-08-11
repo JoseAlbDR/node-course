@@ -1,14 +1,18 @@
-const { readFileSync, writeFileSync } = require("fs");
-const fs = require("fs");
+const { readFile, writeFile } = require("fs");
 
-const first = readFileSync("./content/first.txt", "utf8");
-const second = readFileSync("./content/second.txt", "utf8");
-
-console.log(first);
-console.log(second);
-
-writeFileSync(
-  "./content/result-sync.txt",
-  `Here is the result: ${first}, ${second}\n`,
-  { flag: "a" }
-);
+readFile("./content/first.txt", "utf8", (err, result) => {
+  if (err) return null;
+  const first = result;
+  readFile("./content/second.txt", "utf8", (err, result) => {
+    if (err) return null;
+    const second = result;
+    writeFile(
+      "./content/result-async.txt",
+      `Here is the result: ${first}, ${second}\n`,
+      (err, result) => {
+        if (err) return null;
+        console.log(result);
+      }
+    );
+  });
+});
