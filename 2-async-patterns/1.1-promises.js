@@ -10,4 +10,6 @@ const getText = (path) => {
   });
 };
 
-getText("./content/first.txt").then((res) => console.log(res));
+getText("./content/first.txt")
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
