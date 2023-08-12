@@ -1,13 +1,10 @@
-let i = 0;
+import { createServer } from "http";
 
-const interval = setInterval(() => {
-  console.log("hello world");
-  i++;
-  console.log(i);
-  if (i === 5) clearInterval(interval);
-}, 2000);
+const server = createServer((req, res) => {
+  console.log("request event");
+  res.end("Hello World");
+});
 
-console.log(`I will run first`);
-// process stays alive unless
-// Kill Process CONTROL + C
-// unexpected error
+server.listen(5000, () => {
+  console.log("Server listening on port : 5000....");
+});
